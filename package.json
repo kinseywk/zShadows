@@ -1,0 +1,33 @@
+{
+  "name": "zshadows",
+  "version": "0.1.0",
+	"license": "ISC",
+  "description": "CSS library for generating shadows from a point light source",
+  "keywords": [
+		"css",
+    "style",
+    "stylesheet"
+  ],
+	"author": "Kyle Kinsey",
+	"homepage": "https://github.com/TODO",
+  "repository": {
+		"type": "git",
+    "url": "https://github.com/TODO"
+  },
+	"bugs": {
+		"url": "https://github.com/TODO"
+	},
+	"main": "zShadows.css",
+	"files": [
+		"zShadows.css"
+	],
+	"scripts": {
+		"build": "TODO"
+	},
+	"devDependencies": {
+
+	},
+	"browserslist": [
+		"supports css-variables"
+	]
+}
