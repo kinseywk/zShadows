@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Usage</title>
+	<link rel="stylesheet" href="../zShadows.css">
+	<link rel="icon" href="./favicon.svg">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
+			height: 60%;
+			--element-altitude: 1;
+		}
+
+		h1 {
+			--parent-elevation: 1;
+			--element-altitude: 1;
+		}
+	</style>
+</head>
+<body>
+	<div class="zBoxShadow">
+		<h1 class="zTextShadow">
+			Hello, world!
+		</h1>
+	</div>
+</body>
+</html>
