@@ -13,6 +13,7 @@ Apply the .zBoxShadow style to any element you want to have its box shadow autom
 ## Examples
 
 ### A simple card
+#### CSS
 ```css
 .container {
 	display: flex;
@@ -29,7 +30,7 @@ Apply the .zBoxShadow style to any element you want to have its box shadow autom
 	--element-altitude: 1;
 }
 ```
-
+#### HTML
 ```html
 <div style="container">
 	<div style="card zBoxShadow"></div>
@@ -37,7 +38,7 @@ Apply the .zBoxShadow style to any element you want to have its box shadow autom
 ```
 
 ### Animate the card's elevation
-
+#### JS
 ```js
 let start;
 
@@ -56,7 +57,7 @@ window.requestAnimationFrame(update);
 ```
 
 ### Make the light source move
-
+#### JS
 ```js
 let start;
 
@@ -78,7 +79,7 @@ window.requestAnimationFrame(update);
 ```
 
 ### Add text shadows
-
+#### CSS
 ```css
 .card {
 	display: flex;
@@ -94,7 +95,7 @@ window.requestAnimationFrame(update);
 	--parent-elevation: 1;
 }
 ```
-
+#### HTML
 ```html
 <div id="card" style="card zBoxShadow">
 	<h2 id="text" style="text zTextShadow">Hey now, you're an all-star</h2>
@@ -102,7 +103,7 @@ window.requestAnimationFrame(update);
 ```
 
 ### Animate the elements' elevation
-
+#### JS
 ```js
 let start;
 
@@ -135,7 +136,7 @@ window.requestAnimationFrame(update);
 ```
 
 ### Independent light sources for box and text shadows
-
+#### CSS
 ```css
 .card {
 	--element-altitude: 2;
@@ -148,7 +149,7 @@ window.requestAnimationFrame(update);
 	--light-hue: 120deg;
 }
 ```
-
+#### JS
 ```js
 let start;
 

@@ -23,6 +23,8 @@
 	/*DUNNO: Allow negative values?*/
 	/*This element's distance above its parent*/
 	--element-altitude: 0;
+	/*The distance between this element and its inner text*/
+	--text-altitude: 0;
 
 	/*TODO: Calculate farthest point from light on the element surface*/
 	/*Until then, user will have to set each element's intersection point manually for best results.*/
