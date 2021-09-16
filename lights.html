@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Independent Light Sources</title>
+	<link rel="stylesheet" href="zShadows.css">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			overflow: hidden;
+			background-color: bisque;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
+			height: 60%;
+			--element-altitude: 2;
+			--light-saturation: 33%;
+		}
+
+		h1 {
+			--parent-elevation: 2;
+			--element-altitude: 5;
+			--light-intensity: 200;
+		}
+	</style>
+</head>
+<body>
+	<div id="card" class="zBoxShadow">
+		<h1 id="text" class="zTextShadow">
+			Hello, world!
+		</h1>
+	</div>
+	<script>
+	let start;
+
+	function update(timestamp) {
+		if(start === undefined) {
+			start = timestamp;
+		}
+
+		const time = (timestamp - start) / 1000;
+		const rotation = time % (2 * Math.PI);
+		const sin = Math.sin(rotation);
+		const cos = Math.cos(rotation);
+		
+		const center = {
+			x: window.innerWidth / 2,
+			y: window.innerHeight / 2
+		};
+		
+		const radius = (center.x ** 2 + center.y ** 2) ** 0.5;
+
+		const card = document.getElementById("card");
+		const text = document.getElementById("text");
+		
+		card.style.setProperty("--light-position-x", cos * radius + center.x + "px");
+		card.style.setProperty("--light-position-y", sin * radius + center.y + "px");
+		text.style.setProperty("--light-position-x", -cos * radius + center.x + "px");
+		text.style.setProperty("--light-position-y", -sin * radius + center.y + "px");
+		text.style.setProperty("--light-hue", rotation + "rad");
+
+		window.requestAnimationFrame(update);
+	}
+
+	window.requestAnimationFrame(update);
+	</script>
+</body>
+</html>
