@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Various Animations</title>
+	<link rel="stylesheet" href="zShadows.css">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			overflow: hidden;
+			background-color: bisque;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
+			height: 60%;
+			border: 1px solid gray;
+		}
+	</style>
+</head>
+<body>
+	<div id="card" class="zBoxShadow">
+		<h1 id="text" class="zTextShadow">
+			Hello, world!
+		</h1>
+	</div>
+	<script>
+	let start;
+
+	function update(timestamp) {
+		if(start === undefined) {
+			start = timestamp;
+		}
+
+		const time = (timestamp - start) / 1000;
+		const cycle = time % (2 * Math.PI);
+		const rotation = time / (30 * Math.PI);
+		const sin = Math.sin(cycle);
+		const cos = Math.cos(cycle);
+		
+		const card = document.getElementById("card");
+		const text = document.getElementById("text");
+		
+		const textStartElevation = 7;
+		const textAmplitude = 4;
+		const cardElevation = sin + 2;
+		const textAltitude = cos * textAmplitude + textStartElevation;
+
+		card.style.setProperty("--element-altitude", cardElevation);
+		//BUG: Evidently the element gets rotated _after_ its shadows get generated, so it gives the appearance that the light source is rotating as well
+		card.style.setProperty("transform", `rotate(${rotation}turn)`)
+		card.style.setProperty("border-radius", `${cos * 200 + 100}px`)
+		text.style.setProperty("--parent-elevation", cardElevation);
+		text.style.setProperty("--element-altitude", textAltitude);
+
+		window.requestAnimationFrame(update);
+	}
+
+	window.requestAnimationFrame(update);
+	</script>
+</body>
+</html>
