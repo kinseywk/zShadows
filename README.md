@@ -201,8 +201,6 @@ In general, you'll always want to set each child element's --parent-elevation eq
 
 To keep pointer events working according to [Material Design](https://material.io/design) guidelines, you'll also want to assign each element's z-index to its --parent-elevation + --element-altitude.
 
-While it'll look fine for simple use cases, if you apply the same shadow to an element's text and box, it'll look odd in more complex scenarios. What you really want is to raise the text above the element's surface.
+By default, shadow angle is calculated between the light source's position and the viewport center point. This is a useful global approximation, but it means that all elements will have the same shadow angle.
 
-I'd recommend always making new child element for shaded text and setting its altitude relative to its parent in the same way described above. It might also be worth making the child element's background transparent.
-
-Basically, don't apply .zBoxShadow and .zTextShadow to the same element.
+If you want elements to have shadow angles relative to their own position and dimensions, you'll need to set each shaded element's --intersection-x and --intersection-y to some point on the surface. I'd recommend using either the element's center point, the farthest point on the element from the light source, or the midpoint between the two.

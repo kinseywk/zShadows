@@ -32,22 +32,6 @@
 	/*}*/
 }
 
-.zShadowOn {
-	--element-elevation: calc(var(--parent-elevation) + var(--element-altitude));
-	--light-altitude: calc(var(--light-elevation) - var(--element-elevation));
-	--altitude-ratio: calc(var(--element-altitude) / var(--light-altitude));
-	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
-	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
-}
-
-.zShadowOff {
-	--element-elevation: initial;
-	--light-altitude: initial;
-	--altitude-ratio: initial;
-	--light-direction-x: initial;
-	--light-direction-y: initial;
-}
-
 .zBoxShadow > * {
 	box-shadow: initial;
 }
