@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Usage</title>
+	<link rel="stylesheet" href="zShadows.css">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			overflow: hidden;
+			background-color: bisque;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
+			height: 60%;
+			--element-altitude: 1;
+		}
+
+		h1 {
+			--parent-elevation: 1;
+			--element-altitude: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="card" class="zBoxShadow">
+		<h1 id="text" class="zTextShadow">
+			Hello, world!
+		</h1>
+	</div>
+</body>
+</html>
