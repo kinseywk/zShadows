@@ -1,0 +1,77 @@
+:root {
+	/*{Default light source position = upper-left corner and 10 units above document surface*/
+	--light-position-x: 0px;
+	--light-position-y: 0px;
+	/*DUNNO: How to map z units to pixel space?*/
+	--light-elevation: 100;
+	/*}*/
+
+	/*TODO: Physically-accurate light scattering*/
+	--light-intensity: 100;
+	--blur-factor: 4px;
+	--spread-factor: 1px;
+	/*TODO: Physically-accurate color blending*/
+	--light-hue: 0;
+	--light-saturation: 0%;
+	--light-brightness: 50%;
+	/* --light-color: calc(hsl(var(--light-hue) var(--light-saturation) var(--light-brightness))); */
+	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
+
+	/*The z coordinate of the next element below*/
+	--parent-elevation: 0;
+
+	/*DUNNO: Allow negative values?*/
+	/*This element's distance above its parent*/
+	--element-altitude: 0;
+
+	/*TODO: Calculate farthest point from light on the element surface*/
+	/*Until then, user will have to set each element's intersection point manually for best results.*/
+	/*{By default, I'm setting a global intersection point at the center of the viewport, which should be a rough approximation good enough for simple cases.*/
+	--intersection-x: 50vw;
+	--intersection-y: 50vh;
+	/*}*/
+}
+
+.zShadowOn {
+	--element-elevation: calc(var(--parent-elevation) + var(--element-altitude));
+	--light-altitude: calc(var(--light-elevation) - var(--element-elevation));
+	--altitude-ratio: calc(var(--element-altitude) / var(--light-altitude));
+	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
+	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
+}
+
+.zShadowOff {
+	--element-elevation: initial;
+	--light-altitude: initial;
+	--altitude-ratio: initial;
+	--light-direction-x: initial;
+	--light-direction-y: initial;
+}
+
+.zBoxShadow > * {
+	box-shadow: initial;
+}
+
+.zBoxShadow {
+	--element-elevation: calc(var(--parent-elevation) + var(--element-altitude));
+	--light-altitude: calc(var(--light-elevation) - var(--element-elevation));
+	--altitude-ratio: calc(var(--element-altitude) / var(--light-altitude));
+	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
+	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
+
+	box-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) calc(var(--spread-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
+}
+
+.zTextShadow > * {
+	text-shadow: initial;
+}
+
+.zTextShadow {
+	--element-elevation: calc(var(--parent-elevation) + var(--element-altitude));
+	--light-altitude: calc(var(--light-elevation) - var(--element-elevation));
+	--altitude-ratio: calc(var(--element-altitude) / var(--light-altitude));
+	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
+	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
+
+	text-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
+}
