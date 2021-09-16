@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Basic Usage</title>
+	<title>Independent Light Sources</title>
 	<link rel="stylesheet" href="../zShadows.css">
 	<link rel="icon" href="./favicon.svg">
 	<style>
@@ -23,20 +23,24 @@
 			align-items: center;
 			width: 60%;
 			height: 60%;
-			--element-altitude: 1;
+			--element-altitude: 2;
+			--light-saturation: 33%;
 		}
 
 		h1 {
-			--parent-elevation: 1;
-			--element-altitude: 1;
+			--parent-elevation: 2;
+			--element-altitude: 5;
+			--light-hue: 120deg;
 		}
 	</style>
 </head>
 <body>
 	<div id="card" class="zBoxShadow">
+		<div id="shim" class="zShadowReset">
 		<h1 id="text" class="zTextShadow">
 			Hello, world!
 		</h1>
+		</div>
 	</div>
 	<script>
 	let start;
@@ -46,33 +50,25 @@
 			start = timestamp;
 		}
 
-		const elapsed = (timestamp - start) / 1000;
-		const s = Math.sin(elapsed);
-		const c = Math.cos(elapsed);
-		const w = window.innerWidth;
-		const h = window.innerHeight;
-		const cx = w / 2;
-		const cy = h / 2;
+		const time = (timestamp - start) / 1000;
+		const rotation = time % (2 * Math.PI);
+		const sin = Math.sin(rotation);
+		const cos = Math.cos(rotation);
+		
+		const center = {
+			x: window.innerWidth / 2,
+			y: window.innerHeight / 2
+		};
+		
+		const radius = (center.x ** 2 + center.y ** 2) ** 0.5;
+
 		const card = document.getElementById("card");
 		const text = document.getElementById("text");
-
-		const cardLight = {
-			tx: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-x")) - cx,
-			ty: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-y")) - cy
-		};
-		card.style.setProperty("--light-position-x", cardLight.tx * c - cardLight.ty * s + cx + "px");
-		card.style.setProperty("--light-position-y", cardLight.tx * s + cardLight.ty * c + cy + "px");
-		const newCardLight = {
-			tx: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-x")) - cx,
-			ty: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-y")) - cy
-		};
-
-		const textLight = {
-			tx: parseFloat(getComputedStyle(text).getPropertyValue("--light-position-x")) - cx,
-			ty: parseFloat(getComputedStyle(text).getPropertyValue("--light-position-y")) - cy
-		};
-		text.style.setProperty("--light-position-x", textLight.tx * c - textLight.ty * s + cx + "px");
-		text.style.setProperty("--light-position-y", textLight.tx * s + textLight.ty * c + cy + "px");
+		
+		card.style.setProperty("--light-position-x", cos * radius + center.x + "px");
+		card.style.setProperty("--light-position-y", sin * radius + center.y + "px");
+		text.style.setProperty("--light-position-x", -cos * radius + center.x + "px");
+		text.style.setProperty("--light-position-y", -sin * radius + center.y + "px");
 
 		window.requestAnimationFrame(update);
 	}

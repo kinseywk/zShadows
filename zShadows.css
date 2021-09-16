@@ -11,11 +11,11 @@
 	--blur-factor: 4px;
 	--spread-factor: 1px;
 	/*TODO: Physically-accurate color blending*/
-	--light-hue: 0;
+	--light-hue: 0deg;
 	--light-saturation: 0%;
 	--light-brightness: 50%;
 	/* --light-color: calc(hsl(var(--light-hue) var(--light-saturation) var(--light-brightness))); */
-	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
+	/* --shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness)); */
 
 	/*The z coordinate of the next element below*/
 	--parent-elevation: 0;
@@ -59,6 +59,8 @@
 	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
 	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
 
+	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
+
 	box-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) calc(var(--spread-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
 }
 
@@ -72,6 +74,8 @@
 	--altitude-ratio: calc(var(--element-altitude) / var(--light-altitude));
 	--light-direction-x: calc(var(--intersection-x) - var(--light-position-x));
 	--light-direction-y: calc(var(--intersection-y) - var(--light-position-y));
+
+	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
 
 	text-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
 }
