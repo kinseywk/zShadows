@@ -12,7 +12,7 @@ Apply the .zBoxShadow style to any element you want to have its box shadow autom
 
 ## Examples
 
-#### [Live examples on GitHub](https://github.com/kinseywk/zShadows/blob/gh-pages/index.md)
+#### [Live examples on GitHub](https://kinseywk.github.io/zShadows)
 
 ### A simple card
 #### CSS
