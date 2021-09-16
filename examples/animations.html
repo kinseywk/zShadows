@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Independent Light Sources</title>
+	<title>Various Animations</title>
 	<link rel="stylesheet" href="../zShadows.css">
 	<link rel="icon" href="./favicon.svg">
 	<style>
@@ -23,14 +23,7 @@
 			align-items: center;
 			width: 60%;
 			height: 60%;
-			--element-altitude: 2;
-			--light-saturation: 33%;
-		}
-
-		h1 {
-			--parent-elevation: 2;
-			--element-altitude: 5;
-			--light-intensity: 200;
+			border: 1px solid gray;
 		}
 	</style>
 </head>
@@ -49,32 +42,23 @@
 		}
 
 		const time = (timestamp - start) / 1000;
-		const rotation = time % (2 * Math.PI);
-		const sin = Math.sin(rotation);
-		const cos = Math.cos(rotation);
+		const cycle = time % (2 * Math.PI);
+		const rotation = time / (30 * Math.PI);
+		const sin = Math.sin(cycle);
+		const cos = Math.cos(cycle);
 		
-		const center = {
-			x: window.innerWidth / 2,
-			y: window.innerHeight / 2
-		};
-		
-		const radius = (center.x ** 2 + center.y ** 2) ** 0.5;
-
 		const card = document.getElementById("card");
 		const text = document.getElementById("text");
 		
-		card.style.setProperty("--light-position-x", cos * radius + center.x + "px");
-		card.style.setProperty("--light-position-y", sin * radius + center.y + "px");
-		text.style.setProperty("--light-position-x", -cos * radius + center.x + "px");
-		text.style.setProperty("--light-position-y", -sin * radius + center.y + "px");
-		text.style.setProperty("--light-hue", rotation + "rad");
-
-		const textStartElevation = 6;
-		const textAmplitude = 3;
-		const cardElevation = sin + 1;
+		const textStartElevation = 7;
+		const textAmplitude = 4;
+		const cardElevation = sin + 2;
 		const textAltitude = cos * textAmplitude + textStartElevation;
 
 		card.style.setProperty("--element-altitude", cardElevation);
+		//BUG: Evidently the element gets rotated _after_ its shadows get generated, so it gives the appearance that the light source is rotating as well
+		card.style.setProperty("transform", `rotate(${rotation}turn)`)
+		card.style.setProperty("border-radius", `${cos * 200 + 100}px`)
 		text.style.setProperty("--parent-elevation", cardElevation);
 		text.style.setProperty("--element-altitude", textAltitude);
 
