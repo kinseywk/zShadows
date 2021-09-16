@@ -25,7 +25,7 @@ Apply the .zBoxShadow style to any element you want to have its box shadow autom
 .card {
 	width: 50%;
 	height: 67%;
-
+	/*The z distance between this element and its parent*/
 	--element-altitude: 1;
 }
 ```

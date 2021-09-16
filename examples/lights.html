@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Usage</title>
+	<link rel="stylesheet" href="../zShadows.css">
+	<link rel="icon" href="./favicon.svg">
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			overflow: hidden;
+			background-color: bisque;
+		}
+
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60%;
+			height: 60%;
+			--element-altitude: 1;
+		}
+
+		h1 {
+			--parent-elevation: 1;
+			--element-altitude: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="card" class="zBoxShadow">
+		<h1 id="text" class="zTextShadow">
+			Hello, world!
+		</h1>
+	</div>
+	<script>
+	let start;
+
+	function update(timestamp) {
+		if(start === undefined) {
+			start = timestamp;
+		}
+
+		const elapsed = (timestamp - start) / 1000;
+		const s = Math.sin(elapsed);
+		const c = Math.cos(elapsed);
+		const w = window.innerWidth;
+		const h = window.innerHeight;
+		const cx = w / 2;
+		const cy = h / 2;
+		const card = document.getElementById("card");
+		const text = document.getElementById("text");
+
+		const cardLight = {
+			tx: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-x")) - cx,
+			ty: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-y")) - cy
+		};
+		card.style.setProperty("--light-position-x", cardLight.tx * c - cardLight.ty * s + cx + "px");
+		card.style.setProperty("--light-position-y", cardLight.tx * s + cardLight.ty * c + cy + "px");
+		const newCardLight = {
+			tx: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-x")) - cx,
+			ty: parseFloat(getComputedStyle(card).getPropertyValue("--light-position-y")) - cy
+		};
+
+		const textLight = {
+			tx: parseFloat(getComputedStyle(text).getPropertyValue("--light-position-x")) - cx,
+			ty: parseFloat(getComputedStyle(text).getPropertyValue("--light-position-y")) - cy
+		};
+		text.style.setProperty("--light-position-x", textLight.tx * c - textLight.ty * s + cx + "px");
+		text.style.setProperty("--light-position-y", textLight.tx * s + textLight.ty * c + cy + "px");
+
+		window.requestAnimationFrame(update);
+	}
+
+	window.requestAnimationFrame(update);
+	</script>
+</body>
+</html>
