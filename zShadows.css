@@ -61,7 +61,7 @@
 
 	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
 
-	box-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) calc(var(--spread-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
+	box-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) calc(var(--spread-factor) * var(--light-altitude) / var(--light-intensity)) var(--shadow-color);
 }
 
 .zTextShadow > * {
@@ -77,5 +77,5 @@
 
 	--shadow-color: hsl(var(--light-hue), var(--light-saturation), var(--light-brightness));
 
-	text-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-intensity) / var(--light-altitude)) var(--shadow-color);
+	text-shadow: calc(var(--altitude-ratio) * var(--light-direction-x)) calc(var(--altitude-ratio) * var(--light-direction-y)) calc(var(--blur-factor) * var(--light-altitude) / var(--light-intensity)) var(--shadow-color);
 }

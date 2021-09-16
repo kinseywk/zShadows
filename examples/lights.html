@@ -30,7 +30,7 @@
 		h1 {
 			--parent-elevation: 2;
 			--element-altitude: 5;
-			--light-hue: 120deg;
+			--light-intensity: 200;
 		}
 	</style>
 </head>
@@ -67,6 +67,7 @@
 		card.style.setProperty("--light-position-y", sin * radius + center.y + "px");
 		text.style.setProperty("--light-position-x", -cos * radius + center.x + "px");
 		text.style.setProperty("--light-position-y", -sin * radius + center.y + "px");
+		text.style.setProperty("--light-hue", rotation + "rad");
 
 		window.requestAnimationFrame(update);
 	}
